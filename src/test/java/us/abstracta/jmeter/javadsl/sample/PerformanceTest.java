@@ -31,10 +31,10 @@ public class PerformanceTest {
               .header("accept-encoding", "gzip, deflate, br")
               .header("accept-language", "es,en;q=0.9,en-US;q=0.8")
               .header("cookie", "limit=600"),
-            httpSampler("https://www.cardkingdom.com/catalog/search?filter%5Btab%5D=mtg_card&filter%5Bsort%5D=name&filter%5Bsearch%5D=mtg_advanced&filter%5Bname%5D=&filter%5Bedition%5D=the-lord-of-the-rings-tales-of-middle-earth&filter%5Bformat%5D=&filter%5Btype_mode%5D=any&filter%5Bcard_type%5D%5B10%5D=&filter%5Bpow1%5D=&filter%5Bpow2%5D=&filter%5Btuf1%5D=&filter%5Btuf2%5D=&filter%5Bconcast1%5D=&filter%5Bconcast2%5D=&filter%5Bprice_op%5D=&filter%5Bprice%5D=&filter%5Boracle_text%5D=&filter%5Bmanaprod_select%5D=any&search=mtg_advanced")
+            httpSampler("https://<url>")
             .children(
               responseAssertion(null).containsSubstrings("Search Results"),
-              regexExtractor("precio", "value=\"NM\">\\n<input type=\"hidden\" class=\"qty\" name=\"qty\" value>\\n<input type=\"hidden\" class=\"maxQty\" name=\"maxQty\" value=\".*\">\\n<input type=\"hidden\" name=\"category\" value=\".*\">\\n<input type=\"hidden\" name=\"model\" value=\"mtg_card\">\\n<input type=\"hidden\" name=\"name\" value=\"(.*)\">\\n<input type=\"hidden\" name=\"price\" value=\"([0-9.]*)\">").template("$1$").matchNumber(-1),
+              regexExtractor(<regex>).template("$1$").matchNumber(-1),
               jsr223PostProcessor("int numIteraciones = Integer.parseInt(vars.get(\"precio_matchNr\"));\n"
                 + "double suma = 0.0;\n"
                 + "double valorMaximo = Double.NEGATIVE_INFINITY;\n"
